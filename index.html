@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mahesh — Digital Creator</title>
+
+  <!-- ================== CONFIG (change these) ==================
+       - Set your receiving email and phone below so contact works:
+  ============================================================== -->
+  <script>
+    // Editable values: replace with your real email & phone
+    window.SITE_SETTINGS = {
+      RECIPIENT_EMAIL: "75maheshsoni@gmail.com", // <-- replace with your email
+      MAHESH_PHONE: "+919521273975",              // <-- replace with your WhatsApp / phone number (international format)
+      INSTAGRAM: "https://www.instagram.com/mahesh_sony__",
+      YOUTUBE: "https://youtube.com/@maheshrpgvlogs"
+    };
+  </script>
+
+  <style>
+    /* ---------- Fonts ---------- */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    :root{
+      --bg:#050505;
+      --card:#0f0f10;
+      --gold:#d4af37;
+      --muted:#bfbfbf;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:'Poppins',system-ui,Arial;
+      background:var(--bg);
+      color:#fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    /* ---------- Animated background (particles + gradient) ---------- */
+    .bg {
+      position:fixed; inset:0; z-index:-2;
+      background: radial-gradient(circle at 10% 10%, rgba(212,175,55,0.06), transparent 8%),
+                  radial-gradient(circle at 80% 80%, rgba(212,175,55,0.04), transparent 10%),
+                  linear-gradient(180deg, rgba(10,10,10,1), rgba(4,4,4,1));
+      animation: slowShift 12s infinite alternate;
+    }
+    @keyframes slowShift { from {filter: hue-rotate(0deg)} to{filter:hue-rotate(10deg)} }
+
+    /* float particles */
+    .particle {
+      position:fixed;
+      width:12px; height:12px; background:transparent;
+      border-radius:50%;
+      box-shadow: 0 0 12px rgba(212,175,55,0.6);
+      opacity:0.07; z-index:-1;
+      animation: floatAnim linear infinite;
+      mix-blend-mode:screen;
+    }
+    @keyframes floatAnim {
+      from {transform: translateY(0) translateX(0) scale(.8)}
+      to {transform: translateY(-60vh) translateX(30vw) scale(1.4)}
+    }
+
+    /* ---------- Layout ---------- */
+    .wrap{max-width:1100px;margin:0 auto;padding:30px;}
+    header{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      justify-content:space-between;
+      position:sticky;
+      top:0;
+      background:linear-gradient(180deg, rgba(0,0,0,0.45), rgba(0,0,0,0.25));
+      backdrop-filter: blur(6px);
+      z-index:50;
+      padding:14px 28px;
+      border-bottom:1px solid rgba(212,175,55,0.07);
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:14px;
+    }
+    .brand .logo{
+      width:44px;height:44px;border-radius:10px;border:2px solid var(--gold);
+      display:flex;align-items:center;justify-content:center;color:var(--gold);
+      font-weight:700;font-size:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15));
+    }
+    nav a{
+      color:var(--gold);text-decoration:none;margin-left:16px;font-weight:600;
+      font-size:15px;
+    }
+    nav a:hover{color:#fff}
+
+    /* ---------- Hero ---------- */
+    .hero{
+      display:flex;gap:40px;align-items:center;padding:48px 0;
+      flex-wrap:wrap;
+    }
+    .hero-left{flex:1;min-width:280px}
+    .hero-right{width:300px;display:flex;justify-content:center;}
+
+    .profile {
+      width:300px;height:360px;border-radius:14px;overflow:hidden;border:3px solid var(--gold);
+      box-shadow:0 10px 40px rgba(0,0,0,0.6);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));
+      transform:translateY(0);
+    }
+    .profile img{width:100%;height:100%;object-fit:cover;display:block}
+
+    .hello {color:var(--muted);font-size:16px;margin-bottom:8px}
+    h1 {font-size:44px;margin:0;color:var(--gold);text-shadow:0 3px 18px rgba(212,175,55,0.12)}
+    .tag {font-size:18px;color:#ddd;margin-top:8px}
+
+    .cta-row{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn {
+      display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:9px;
+      font-weight:600;font-size:15px;border:2px solid var(--gold);cursor:pointer;background:transparent;color:var(--gold);
+      transition:.22s;
+    }
+    .btn:hover{background:var(--gold);color:#000}
+    .btn.primary{background:var(--gold);color:#000}
+    .social-small a{margin-right:8px;color:var(--gold);text-decoration:none;font-weight:600}
+
+    /* ---------- Sections ---------- */
+    section{padding:40px 0;border-top:1px solid rgba(255,255,255,0.02)}
+    .section-title{color:var(--gold);font-size:28px;margin-bottom:16px}
+    .muted{color:#cfcfcf}
+
+    /* skills/services grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      border:2px solid rgba(212,175,55,0.12);padding:18px;border-radius:12px;
+      transition:transform .25s, box-shadow .25s;
+    }
+    .card:hover{transform:translateY(-8px);box-shadow:0 22px 60px rgba(0,0,0,0.6)}
+
+    /* portfolio */
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+    .project {
+      height:160px;border-radius:10px;background:#111;overflow:hidden;position:relative;
+      border:2px solid rgba(212,175,55,0.08);
+    }
+    .project .overlay{position:absolute;inset:0;padding:12px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff}
+    .project h4{margin:0;color:var(--gold)}
+    .project p{margin:6px 0 0;font-size:13px;color:#ddd}
+
+    /* modal */
+    .modal {
+      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);
+      visibility:hidden;opacity:0;transition:opacity .2s, visibility .2s;z-index:200;
+    }
+    .modal.open{visibility:visible;opacity:1}
+    .modal .panel{background:var(--card);padding:20px;border-radius:12px;max-width:760px;width:94%;border:2px solid rgba(212,175,55,0.08)}
+    .modal .close{background:transparent;border:none;color:var(--gold);font-weight:700;cursor:pointer;font-size:18px}
+
+    /* contact form */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+    .contact-card{padding:18px;border-radius:10px;border:2px solid rgba(212,175,55,0.08);background:#0b0b0b}
+    input,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;margin-top:8px}
+    label{font-size:14px;color:var(--muted);display:block}
+    .small-note{font-size:13px;color:var(--muted);margin-top:8px}
+
+    .submit-row{display:flex;gap:12px;margin-top:12px;align-items:center}
+    .phone-cta{display:flex;flex-direction:column;gap:10px}
+    .whatsapp {
+      background:linear-gradient(90deg,#25D366,#128C7E);color:#fff;border:none;padding:10px;border-radius:8px;font-weight:700;cursor:pointer;
+    }
+
+    footer{padding:18px;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02);margin-top:28px}
+
+    /* responsive */
+    @media (max-width:880px){ .contact-grid{grid-template-columns:1fr} .hero-right{width:100%} header{padding:10px 16px} h1{font-size:34px} }
+
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+
+  <!-- floating particles (decorative) -->
+  <div id="particles"></div>
+
+  <!-- HEADER -->
+  <header class="wrap" role="banner">
+    <div class="brand">
+      <div class="logo">M</div>
+      <div>
+        <div style="color:var(--gold);font-weight:700">Mahesh</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Digital Creator</div>
+      </div>
+    </div>
+
+    <nav aria-label="Main navigation">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="wrap" role="main">
+
+    <!-- HERO -->
+    <section class="hero" id="home" aria-label="Intro">
+      <div class="hero-left">
+        <div class="hello">Hello, I'm</div>
+        <h1>Mahesh</h1>
+        <div class="tag">Digital Creator • Editor • Storyteller</div>
+
+        <div class="cta-row">
+          <a class="btn primary" href="#contact" role="button">Hire Me</a>
+          <a class="btn" href="#portfolio">My Work</a>
+          <div style="margin-left:10px" class="social-small">
+            <a href="#" id="open-inst">Instagram</a> ·
+            <a href="#" id="open-yt">YouTube</a>
+          </div>
+        </div>
+
+        <p style="margin-top:18px;color:var(--muted);max-width:640px">
+          I craft cinematic reels, thumbnails and promotional videos that convert viewers into fans. I combine storytelling, editing & design to build memorable creator brands.
+        </p>
+      </div>
+
+      <div class="hero-right">
+        <div class="profile" aria-hidden="false">
+          <!-- Put your saved photo at images/mahesh.jpg -->
+          <img src="https://digitalcreator.in/wp-content/uploads/2025/09/1-2.png" alt="Mahesh profile photo (replace images/mahesh.jpg)">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-title">About Me</div>
+      <div class="muted">A passionate creator who loves cinematic edits, reels and brand storytelling.</div>
+
+      <div style="display:flex;gap:20px;margin-top:18px;flex-wrap:wrap">
+        <div style="flex:1;min-width:260px">
+          <div class="card">
+            <h3 style="color:var(--gold);margin-top:0">Who I am</h3>
+            <p class="muted">
+              Hi, I'm Mahesh. I make content that looks premium and feels personal. From editing reels to designing thumbnails, I focus on quality storytelling and professional delivery.
+            </p>
+          </div>
+        </div>
+
+        <div style="width:320px">
+          <div class="card">
+            <h4 style="color:var(--gold);margin-top:0">Quick Stats</h4>
+            <p class="muted">Reels • YouTube • Branding • Thumbnails</p>
+            <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+              <div class="card" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)">Video Editing</div>
+              <div class="card" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)">Thumbnails</div>
+              <div class="card" style="padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03)">Branding</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-title">Services</div>
+      <div class="grid" style="margin-top:14px">
+        <div class="card">
+          <h3 style="margin-top:0;color:var(--gold)">Reels Editing</h3>
+          <p class="muted">Cinematic cuts, transitions and color grading to make your reels pop.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;color:var(--gold)">Brand Videos</h3>
+          <p class="muted">Short promotional videos & intros for creators and brands.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;color:var(--gold)">Thumbnail Design</h3>
+          <p class="muted">Click-winning thumbnails optimized for views.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0;color:var(--gold)">Consulting</h3>
+          <p class="muted">Content strategy and growth ideas for creators.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <div class="section-title">Portfolio</div>
+      <div class="projects" style="margin-top:12px">
+        <div class="project" tabindex="0" data-title="Travel Reel" data-desc="Cinematic travel reel with color grade and smooth transitions." onclick="openModal(this)">
+          <div class="overlay"><h4>Travel Reel</h4><p>Cinematic travel reel</p></div>
+          <img src="https://img.freepik.com/free-vector/gradient-black-background-with-golden-textures_23-2149153424.jpg?semt=ais_hybrid&w=740&q=80" alt="">
+        </div>
+
+        <div class="project" tabindex="0" data-title="Logo Animation" data-desc="Short logo reveal for YouTube intros & brand identity." onclick="openModal(this)">
+          <div class="overlay"><h4>Logo Animation</h4><p>Modern intro</p></div>
+          <img src="https://img.freepik.com/free-vector/gradient-black-background-with-golden-textures_23-2149153424.jpg?semt=ais_hybrid&w=740&q=80" alt="">
+        </div>
+
+        <div class="project" tabindex="0" data-title="Short Story Video" data-desc="Story-driven short video for YouTube." onclick="openModal(this)">
+          <div class="overlay"><h4>Short Story Video</h4><p>Storytelling</p></div>
+          <img src="https://img.freepik.com/free-vector/gradient-black-background-with-golden-textures_23-2149153424.jpg?semt=ais_hybrid&w=740&q=80" alt="">
+        </div>
+      </div>
+    </section>
+
+    <!-- MODAL FOR PROJECT -->
+    <div id="projectModal" class="modal" role="dialog" aria-hidden="true">
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <strong id="modalTitle" style="color:var(--gold)"></strong>
+          <button class="close" onclick="closeModal()">✕</button>
+        </div>
+        <p id="modalDesc" style="color:#ddd;margin-top:12px"></p>
+        <div style="margin-top:12px;display:flex;gap:10px">
+          <a id="modalView" class="btn" href="#" target="_blank">View Project</a>
+          <a id="modalContact" class="btn primary" href="#contact">Work With Me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">Contact Me</div>
+      <div class="contact-grid" style="margin-top:12px">
+        <!-- form left -->
+        <div class="contact-card">
+          <form id="contactForm">
+            <label for="name">Your Name</label>
+            <input id="name" name="name" type="text" required placeholder="Your name">
+
+            <label for="email">Your Email</label>
+            <input id="email" name="email" type="email" required placeholder="name@example.com">
+
+            <label for="phone">Phone Number</label>
+            <input id="phone" name="phone" type="text" required placeholder="Mobile / WhatsApp number">
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Tell me about your project..."></textarea>
+
+            <div class="submit-row">
+              <button type="submit" class="btn primary">Send Message</button>
+
+              <div style="margin-left:auto">
+                <button type="button" class="btn" id="copyEmail">Copy Email</button>
+              </div>
+            </div>
+
+            <div class="small-note">On submit this will open your email app pre-filled (no server). Replace recipient email in the top script.</div>
+          </form>
+        </div>
+
+        <!-- right contact methods -->
+        <aside>
+          <div class="contact-card">
+            <h4 style="margin-top:0;color:var(--gold)">Quick Contact</h4>
+            <p class="muted">Call or WhatsApp directly</p>
+
+            <div style="margin-top:12px" class="phone-cta">
+              <button class="whatsapp" id="whatsappBtn">Message on WhatsApp</button>
+              <a id="callLink" class="btn" href="#">Call</a>
+            </div>
+
+            <div style="margin-top:16px">
+              <div style="color:var(--muted);font-size:13px">Scan to Instagram</div>
+              <img style="margin-top:10px;border-radius:8px;border:2px solid rgba(212,175,55,0.08)" src="" id="qrImg" alt="QR code">
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      <div>©️ 2025 Mahesh • Digital Creator</div>
+      <div style="margin-top:6px;color:var(--muted)">Made with ❤️ — Replace email & phone in code to receive messages directly</div>
+    </footer>
+
+  </main>
+
+  <!-- ================== SCRIPTS ================== -->
+  <script>
+    // ----- small helpers -----
+    const S = window.SITE_SETTINGS || {};
+    const recipient = S.RECIPIENT_EMAIL || 'maheshofficial@gmail.com';
+    const phone = S.MAHESH_PHONE || '+91xxxxxxxxxx';
+
+    // wire external links
+    document.getElementById('open-inst').href = S.INSTAGRAM || '#';
+    document.getElementById('open-yt').href = S.YOUTUBE || '#';
+    document.getElementById('callLink').href = 'tel:' + phone;
+    document.getElementById('whatsappBtn').addEventListener('click', () => {
+      // open WhatsApp chat (it works on mobile or web.whatsapp.com on desktop)
+      const text = encodeURIComponent('Hi Mahesh, I saw your portfolio and would like to connect.');
+      window.open('https://wa.me/' + phone.replace(/\D/g,'') + '?text=' + text, '_blank');
+    });
+
+    // QR image points to Instagram
+    const qr = document.getElementById('qrImg');
+    qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(S.INSTAGRAM || location.href);
+
+    // contact form handling: validate then open mailto:
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const phoneField = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if(!name || !email || !message || !phoneField) {
+        alert('Please fill all fields.');
+        return;
+      }
+
+      // prepare mailto (subject + body)
+      const subject = encodeURIComponent('Website Contact — ' + name);
+      let body = '';
+      body += 'Name: ' + name + '\n';
+      body += 'Email: ' + email + '\n';
+      body += 'Phone: ' + phoneField + '\n\n';
+      body += 'Message:\n' + message + '\n\n';
+      body += '— sent from Mahesh website';
+
+      // open mailto
+      window.location.href = 'mailto:' + recipient + '?subject=' + subject + '&body=' + encodeURIComponent(body);
+
+      // Optionally show a friendly note
+      setTimeout(()=> alert('Your email client should open. If it did not, copy the email and message manually.'), 600);
+    });
+
+    // copy email button
+    document.getElementById('copyEmail').addEventListener('click', () => {
+      navigator.clipboard.writeText(recipient).then(()=> {
+        alert('Recipient email copied: ' + recipient);
+      }, ()=> alert('Copy failed. Please copy manually: ' + recipient));
+    });
+
+    // projects modal
+    function openModal(el){
+      const title = el.dataset.title || 'Project';
+      const desc = el.dataset.desc || '';
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalDesc').textContent = desc;
+      document.getElementById('projectModal').classList.add('open');
+      document.getElementById('projectModal').setAttribute('aria-hidden','false');
+    }
+    function closeModal(){
+      document.getElementById('projectModal').classList.remove('open');
+      document.getElementById('projectModal').setAttribute('aria-hidden','true');
+    }
+    window.closeModal = closeModal;
+    window.openModal = openModal;
+
+    // keyboard escape for modal
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+    // make floating particles programmatically
+    (function createParticles(){
+      const container = document.getElementById('particles');
+      const count = Math.max(6, Math.floor(window.innerWidth/120));
+      for(let i=0;i<count;i++){
+        const p = document.createElement('div');
+        p.className = 'particle';
+        const size = 6 + Math.random()*18;
+        p.style.width = size +'px';
+        p.style.height = size +'px';
+        p.style.left = Math.random()*100 + 'vw';
+        p.style.top = 80 + Math.random()*40 + 'vh';
+        p.style.opacity = (0.03 + Math.random()*0.12).toFixed(2);
+        p.style.animationDuration = (18 + Math.random()*22) + 's';
+        p.style.animationDelay = (-Math.random()*20) + 's';
+        document.body.appendChild(p);
+      }
+    })();
+
+    // small accessibility: smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+  </script>
+</body>
+</html>
